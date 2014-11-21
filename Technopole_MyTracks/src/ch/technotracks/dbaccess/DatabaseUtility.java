@@ -25,6 +25,9 @@ public class DatabaseUtility extends SQLiteOpenHelper
 	private static final int DATABASE_VERSION = 2;
 	private static final String TABLE_POINTS = "Points";
 	private static final String TABLE_TRACKS = "Tracks";
+	private static final String TABLE_USERS = "Users" ;
+	private static final String TABLE_EMERGENCIES = "Emergencies" ;
+	private static final String TABLE_USERS_EMERGENCIES = "Users_Emergencies" ;
 	private static final String TABLE_POINTS_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_POINTS +
 												"(id INTEGER PRIMARY KEY NOT NULL," +
 												"trackId INTEGER," +
@@ -37,11 +40,41 @@ public class DatabaseUtility extends SQLiteOpenHelper
 												"satellites INTEGER," +
 												"time LONG," +
 												"uploaded BOOLEAN)";
+	
 	private static final String TABLE_TRACKS_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_TRACKS +
 													"(id INTEGER PRIMARY KEY NOT NULL," +
+													"userId INTEGER," +
 													"date DATE," +
 													"name TEXT," +
 													"type TEXT)";
+	
+	private static final String TABLE_USERS_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_USERS +
+			"(id INTEGER PRIMARY KEY NOT NULL," +
+			"name TEXT," +
+			"firstname TEXT," +
+			"username TEXT," +
+			"password TEXT," +
+			"mail TEXT," +
+			"championship BOOLEAN," +
+			"nationality TEXT DEFAULT null," +
+			"country TEXT DEFAULT null," +
+			"gender TEXT DEFAULT null," +
+			"dateofbirth DATE DEFAULT null," +
+			"disability BOOLEAN DEFAULT 0," +
+			"disabledlist BOOLEAN DEFAULT 0)";
+	
+	private static final String TABLE_USERS_EMERGENCY_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_USERS_EMERGENCIES +
+			"(userId INTEGER" +
+			"emergencyId INTEGER)";
+			
+	
+	private static final String TABLE_EMERGENCIES_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_EMERGENCIES +
+			"(id INTEGER PRIMARY KEY NOT NULL," +
+			"name TEXT," +
+			"firstname TEXT," +
+			"mail TEXT," +
+			"phone TEXT)";
+	
 	
 	/**
 	 * Create the database

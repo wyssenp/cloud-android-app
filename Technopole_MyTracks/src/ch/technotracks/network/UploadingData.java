@@ -33,6 +33,7 @@ import ch.technotracks.dbaccess.DatabaseAccessObject;
  * @author Joel
  *
  */
+
 public class UploadingData extends AsyncTask<Cursor, Void, Void>
 {
 	private HttpClient httpClient;
