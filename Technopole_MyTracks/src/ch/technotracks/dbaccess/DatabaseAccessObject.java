@@ -56,7 +56,7 @@ public abstract class DatabaseAccessObject
 	 */
 	public static int getMaxTrackId()
 	{
-		String sql = "SELECT MAX(id) FROM Tracks";
+		String sql = "SELECT MAX(trackId) FROM Track";
 		
 		Cursor cursor = database.rawQuery(sql, null);
 		
@@ -73,7 +73,7 @@ public abstract class DatabaseAccessObject
 	 */
 	public static Cursor getTracks()
 	{
-		String sql = "SELECT id AS _id, date, name FROM Tracks";	//AS _id necessary for the SimpleCursorAdapter
+		String sql = "SELECT trackId AS _id, date, name FROM Track";	//AS _id necessary for the SimpleCursorAdapter
 
         return database.rawQuery(sql, null);
 	}
@@ -87,7 +87,7 @@ public abstract class DatabaseAccessObject
 	 */
 	public static Cursor getTrackPoints(int trackId)
 	{
-		String sql = "SELECT longitude, latitude, altitude FROM Points WHERE trackId = " + trackId;
+		String sql = "SELECT longitude, latitude, altitude FROM Point WHERE trackId = " + trackId;
 
         return database.rawQuery(sql, null);
 	}
@@ -101,7 +101,7 @@ public abstract class DatabaseAccessObject
 	 */
 	public static Cursor getTrackDetails(int trackId)
 	{
-		String sql = "SELECT date, name FROM Tracks WHERE id = " + trackId;
+		String sql = "SELECT date, name FROM Track WHERE trackId = " + trackId;
 
         return database.rawQuery(sql, null);
 	}
@@ -126,7 +126,7 @@ public abstract class DatabaseAccessObject
 	 */
 	private static Cursor selectAllToUpload()
 	{
-		String sql = "SELECT id, latitude, longitude, altitude, accuracy, satellites FROM Points WHERE uploaded = 'false'";
+		String sql = "SELECT trackId, latitude, longitude, altitude, accuracy, satellites FROM Point WHERE uploaded = 'false'";
 
         return database.rawQuery(sql, null);
 	}
@@ -138,7 +138,7 @@ public abstract class DatabaseAccessObject
 	 */
 	public static void setUploadedToTrue(int id)
 	{
-		String sql = "UPDATE Points SET uploaded = 'true' WHERE id = " + id;
+		String sql = "UPDATE Point SET uploaded = 'true' WHERE pointId = " + id;
 		
 		Cursor c = database.rawQuery(sql, null);
 		c.moveToFirst();
@@ -181,7 +181,7 @@ public abstract class DatabaseAccessObject
 		values.put("satellites", satellites);
 		values.put("uploaded", "false");
 		
-		database.insert("Points", null, values);
+		database.insert("Point", null, values);
 	}
 	
 	/**
@@ -200,11 +200,11 @@ public abstract class DatabaseAccessObject
 						(c.get(Calendar.MONTH) + 1) + "/" +
 						c.get(Calendar.YEAR);
 		
-		values.put("id", trackID);
+		values.put("trackId", trackID);
 		values.put("name", trackName);
 		values.put("date", date);
 		
-		database.insert("Tracks", null, values);
+		database.insert("Track", null, values);
 	}
 	
 	/**
@@ -214,7 +214,7 @@ public abstract class DatabaseAccessObject
 	 */
 	public static void deleteTrack(int trackId)
 	{
-		String query = "DELETE FROM Tracks WHERE id = " + trackId;
+		String query = "DELETE FROM Track WHERE trackId = " + trackId;
 		
 		database.execSQL(query);
 		
@@ -228,7 +228,7 @@ public abstract class DatabaseAccessObject
 	 */
 	private static void deletePoints(int trackId)
 	{
-		String query = "DELETE FROM Points WHERE trackId = " + trackId;
+		String query = "DELETE FROM Point WHERE trackId = " + trackId;
 		
 		database.execSQL(query);
 	}
