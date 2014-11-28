@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 public class LeaderboardsRegistration extends FragmentActivity {
 
+	//This is a comment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
