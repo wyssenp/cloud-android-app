@@ -1,10 +1,10 @@
 package ch.technotracks.ui;
 
 import ch.technotracks.R;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-public class EmergencyActivity extends ActionBarActivity {
+public class EmergencyActivity extends FragmentActivity {
 
 	//This is a comment
 	@Override
