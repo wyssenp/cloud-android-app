@@ -19,7 +19,6 @@ import ch.technotracks.file.DirectoryTools;
 import ch.technotracks.file.Kml;
 import ch.technotracks.network.DownloadMap;
 import ch.technotracks.network.NetworkTools;
-
 import ch.technotracks.R;
 
 
@@ -50,6 +49,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.IOException;
+import java.util.Date;
+
+import android.os.AsyncTask;
+import android.content.Context;
+
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestInitializer;
+//import com.google.api.client.json.jackson.JacksonFactory;
+import com.mycompany.services.userendpoint.model.User;
+import com.mycompany.services.userendpoint.Userendpoint;
 /**
  * The main activity class
  * @author Joel
@@ -63,7 +74,6 @@ public class MainActivity extends FragmentActivity
     private Button newTrack;
     private int track;
     private EditText trackName;
-
 
     /**
      * Bind menu to list
