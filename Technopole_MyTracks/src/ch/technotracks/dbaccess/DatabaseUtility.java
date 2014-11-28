@@ -22,6 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseUtility extends SQLiteOpenHelper
 {
 	private static final String DATABASE_NAME = "TechnoTracks.db";
+	private static final String DB_PATH = "/mnt/sdcard/" ;
 	private static final int DATABASE_VERSION = 2;
 	private static final String TABLE_POINT = "Point";
 	private static final String TABLE_TRACK = "Track";
@@ -132,7 +133,7 @@ public class DatabaseUtility extends SQLiteOpenHelper
 	 */
 	public DatabaseUtility(Context context)
 	{
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, DB_PATH + DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	/**

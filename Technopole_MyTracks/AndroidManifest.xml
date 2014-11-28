@@ -31,7 +31,18 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_capturing" >
         </activity>
-
+        <activity
+            android:name=".ui.RegistrationActivity"
+            android:label="@string/title_activity_registration" >
+        </activity>
+        <activity
+            android:name=".ui.LeaderboardsRegistration"
+            android:label="@string/title_activity_leaderboards_registration" >
+        </activity>
+        <activity
+            android:name="ch.technotracks.ui.EmergencyActivity"
+            android:label="@string/title_activity_emergency" >
+        </activity>
     </application>
 
 </manifest>

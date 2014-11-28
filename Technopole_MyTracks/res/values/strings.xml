@@ -22,14 +22,29 @@
     <string name="googleEarthNecessary">Google earth is necessary for displaying kml file correctly</string>
     <string name="missingMap">Missing map</string>
     <string name="missingMapMessage">This application need a map.\nActivate network and restart to download</string>
-	<string name="newTrackName">New track name</string>
+    <string name="newTrackName">New track name</string>
     <string name="noGps">No GPS Enabled</string>
     <string name="enableGps">Do you want to enable GPS ?</string>
     <string name="currentLocation">Current Location</string>
     <string name="youAreHere">You are here !</string>
     <string name="newTrack">New Track</string>
     <string name="downloadMap">Download map</string>
-    <string name="reDownloadMap">If map does not display properly you can redownload it now.
-    </string>
+    <string name="reDownloadMap">If map does not display properly you can redownload it now.</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="leaderboards">Leaderboards</string>
+    <string name="btnContinue">Continue</string>
+    <string name="title_activity_leaderboards_registration">Leaderboards - Registration</string>
+    <string name="leaderboardsInformationText">Select the leaderboards you want to be ranked in:</string>
+    <string name="chkByTownship">By township</string>
+    <string name="chkByCountry">By country</string>
+    <string name="chkByDuration">By duration</string>
+    <string name="buttonDoItLater">I\'ll do it later</string>
+    <string name="buttonDone">Done</string>
+    <string name="txtLastname">Last name</string>
+    <string name="txtFirstname">First name</string>
+    <string name="txtUsername">Username</string>
+    <string name="txtEmail">E-Mail</string>
+    <string name="toastLeaderboards">If checked, you\'ll be able to choose the leaderboards you will be ranked in.</string>
+    <string name="title_activity_emergency">EmergencyActivity</string>
 
 </resources>
