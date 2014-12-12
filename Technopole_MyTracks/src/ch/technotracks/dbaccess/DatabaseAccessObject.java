@@ -57,6 +57,30 @@ public abstract class DatabaseAccessObject
 	 * A cursor containing datas
 	 */
 	
+	public static long getMaxTime(int trackId)
+	{
+		String sql = "SELECT MAX(time) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getLong(0);
+	}
+	
+	public static long getMinTime(int trackId)
+	{
+		String sql = "SELECT MIN(time) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getLong(0);
+	}
+	
 	public static int getNumberOfPoints(int trackId)
 	{
 		String sql = "SELECT COUNT(DISTINCT pointId) FROM Point WHERE trackId = " + trackId ;

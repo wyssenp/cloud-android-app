@@ -35,8 +35,12 @@ import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.android.maps.overlay.OverlayWay;
 import org.mapsforge.core.GeoPoint;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import ch.technotracks.R;
 import ch.technotracks.constant.Constant;
@@ -138,11 +142,11 @@ public class Capturing extends MapActivity
 
 	private void putStats() 
 	{
-		int i = DatabaseAccessObject.getNumberOfPoints(track);
-
-		Log.d(STORAGE_SERVICE, Integer.toString(i));
-
+		long i = DatabaseAccessObject.getMaxTime(track);
+		long v = DatabaseAccessObject.getMinTime(track);
+	    
 	}
+	
 
 	/**
 	 * Test if data exist for the selected track and put them on the map
