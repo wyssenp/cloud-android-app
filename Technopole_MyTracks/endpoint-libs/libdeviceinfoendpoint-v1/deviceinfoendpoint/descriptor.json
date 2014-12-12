@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/deviceinfoendpoint/v1/20141128135702/java/1.18.0-rc/technotracks.ch-deviceinfoendpoint-v1-20141128135702-java-1.18.0-rc-sources.jar", 
-      "path": "technotracks.ch-deviceinfoendpoint-v1-20141128135702-java-1.18.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/deviceinfoendpoint/v1/20141211223140/java/1.18.0-rc/technotracks.ch-deviceinfoendpoint-v1-20141211223140-java-1.18.0-rc-sources.jar", 
+      "path": "technotracks.ch-deviceinfoendpoint-v1-20141211223140-java-1.18.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-11-28 13:57"
+      "timestamp": "2014-12-11 22:31"
     }, 
     {
-      "path": "technotracks.ch-deviceinfoendpoint-v1-20141128135702-java-1.18.0-rc.jar.properties", 
+      "path": "technotracks.ch-deviceinfoendpoint-v1-20141211223140-java-1.18.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -674,5 +674,5 @@
   "version": "v1", 
   "language_version": "1.18.0-rc", 
   "id": "deviceinfoendpoint:v1", 
-  "revision": 20141128135702
+  "revision": 20141211223140
 }

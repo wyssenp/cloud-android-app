@@ -1,25 +1,28 @@
-# view AndroidManifest.xml #generated:33
+# view AndroidManifest.xml #generated:57
 -keep class ch.technotracks.GCMIntentService { <init>(...); }
 
-# view AndroidManifest.xml #generated:45
+# view AndroidManifest.xml #generated:74
 -keep class ch.technotracks.RegisterActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:25
+# view AndroidManifest.xml #generated:39
 -keep class ch.technotracks.ui.Capturing { <init>(...); }
 
-# view AndroidManifest.xml #generated:31
+# view AndroidManifest.xml #generated:77
+-keep class ch.technotracks.ui.DisplayStats { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
 -keep class ch.technotracks.ui.EmergencyActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:29
+# view AndroidManifest.xml #generated:48
 -keep class ch.technotracks.ui.LeaderboardsRegistration { <init>(...); }
 
-# view AndroidManifest.xml #generated:18
+# view AndroidManifest.xml #generated:30
 -keep class ch.technotracks.ui.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:27
+# view AndroidManifest.xml #generated:44
 -keep class ch.technotracks.ui.RegistrationActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:34
+# view AndroidManifest.xml #generated:59
 -keep class com.google.android.gcm.GCMBroadcastReceiver { <init>(...); }
 
 # view res/layout/activity_capturing_advanced.xml #generated:8

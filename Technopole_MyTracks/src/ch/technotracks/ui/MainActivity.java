@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,6 +55,7 @@ import java.util.Date;
 
 import android.os.AsyncTask;
 import android.content.Context;
+import android.content.DialogInterface.OnClickListener;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
@@ -111,7 +113,7 @@ public class MainActivity extends FragmentActivity
                 return true;
         }
 
-        return false;
+        return false; 
     }
 
     private void createNewTrackDialog()
@@ -388,21 +390,65 @@ public class MainActivity extends FragmentActivity
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,	long id)
         {
+        	
+        	
             Cursor c = (Cursor)(listAdapter.getItem(position));
-            int trackId = 0;
             if (c != null)
             {
-                trackId = c.getInt(0);
+                track = c.getInt(0);
             }
 
             parent.getItemAtPosition(position);
-
-            Intent i = new Intent(getApplicationContext(), Capturing.class);
+            
+            showChooseDialog();
+            
+            /*
+            Intent i = new Intent(getApplicationContext(), DisplayStats.class);
             i.putExtra("trackNumber", trackId);
 
             startActivity(i);
+            */
         }
     }
+    
+    private void showChooseDialog()
+    {
+		OnClickListener clickListener = new MyClicListener();
+    	
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Display");
+        dialog.setMessage("Track or Stats");
+        dialog.setCancelable(false);
+        dialog.setPositiveButton("Track", clickListener);
+		dialog.setNegativeButton("Stats", clickListener);
+
+        dialog.show();
+    }
+    
+    private class MyClicListener implements OnClickListener
+	{
+		/**
+		 * Called when we click on a button
+		 */
+		@Override
+		public void onClick(DialogInterface dialog, int which)
+		{
+			if(which == Dialog.BUTTON_POSITIVE)
+			{
+				Intent i = new Intent(getApplicationContext(), Capturing.class);
+	            i.putExtra("trackNumber", track);
+
+	            startActivity(i);
+			}
+			else
+			{
+				Intent i = new Intent(getApplicationContext(), DisplayStats.class);
+	            i.putExtra("trackNumber", track);
+
+	            startActivity(i);
+			}
+		}
+	}
 
     /**
      * A custom on click listener

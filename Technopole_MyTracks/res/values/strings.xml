@@ -46,5 +46,8 @@
     <string name="txtEmail">E-Mail</string>
     <string name="toastLeaderboards">If checked, you\'ll be able to choose the leaderboards you will be ranked in.</string>
     <string name="title_activity_emergency">EmergencyActivity</string>
+    <string name="title_activity_display_stats">DisplayStats</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -50,6 +50,207 @@ public abstract class DatabaseAccessObject
 	}
 	
 	/**
+	 * Get STATS
+	 * @param trackId
+	 * The track id
+	 * @return
+	 * A cursor containing datas
+	 */
+	
+	public static int getNumberOfPoints(int trackId)
+	{
+		String sql = "SELECT COUNT(DISTINCT pointId) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getInt(0);
+	}
+	
+	public static float getMaxBearing(int trackId)
+	{
+		String sql = "SELECT MAX(bearing) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getFloat(0);
+	}
+	
+	public static float getMinBearing(int trackId)
+	{
+		String sql = "SELECT MIN(bearing) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getFloat(0);
+	}
+	
+	public static float getAvgBearing(int trackId)
+	{
+		String sql = "SELECT AVG(bearing) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getFloat(0);
+	}
+	
+	public static float getMaxSpeed(int trackId)
+	{
+		String sql = "SELECT MAX(speed) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getFloat(0);
+	}
+	
+	public static float getMinSpeed(int trackId)
+	{
+		String sql = "SELECT MIN(speed) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getFloat(0);
+	}
+	
+	public static float getAvgSpeed(int trackId)
+	{
+		String sql = "SELECT AVG(speed) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getFloat(0);
+	}
+	
+	public static double getMaxAltitude(int trackId)
+	{
+		String sql = "SELECT MAX(altitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getMinAltitude(int trackId)
+	{
+		String sql = "SELECT MIN(altitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getAvgAltitude(int trackId)
+	{
+		String sql = "SELECT AVG(altitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getMaxLongitude(int trackId)
+	{
+		String sql = "SELECT MAX(longitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getMinLongitude(int trackId)
+	{
+		String sql = "SELECT MIN(longitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getAvgLongitude(int trackId)
+	{
+		String sql = "SELECT AVG(longitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getMaxLatitude(int trackId)
+	{
+		String sql = "SELECT MAX(latitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getMinLatitude(int trackId)
+	{
+		String sql = "SELECT MIN(latitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+	
+	public static double getAvgLatitude(int trackId)
+	{
+		String sql = "SELECT AVG(latitude) FROM Point WHERE trackId = " + trackId ;
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		
+		if(!cursor.moveToFirst())
+			return 0;
+		
+		return cursor.getDouble(0);
+	}
+
+	
+	/**
 	 * Give the last id in the tracks
 	 * @return
 	 * The last id

@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/trackendpoint/v1/20141128135752/java/1.18.0-rc/mycompany.com-trackendpoint-v1-20141128135752-java-1.18.0-rc-sources.jar", 
-      "path": "mycompany.com-trackendpoint-v1-20141128135752-java-1.18.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/trackendpoint/v1/20141211223156/java/1.18.0-rc/mycompany.com-trackendpoint-v1-20141211223156-java-1.18.0-rc-sources.jar", 
+      "path": "mycompany.com-trackendpoint-v1-20141211223156-java-1.18.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-11-28 13:57"
+      "timestamp": "2014-12-11 22:31"
     }, 
     {
-      "path": "mycompany.com-trackendpoint-v1-20141128135752-java-1.18.0-rc.jar.properties", 
+      "path": "mycompany.com-trackendpoint-v1-20141211223156-java-1.18.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -675,5 +675,5 @@
   "packagePath": "services", 
   "language_version": "1.18.0-rc", 
   "id": "trackendpoint:v1", 
-  "revision": 20141128135752
+  "revision": 20141211223156
 }
