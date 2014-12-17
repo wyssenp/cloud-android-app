@@ -442,10 +442,10 @@ public class MainActivity extends FragmentActivity
 			}
 			else
 			{
-				Intent i = new Intent(getApplicationContext(), DisplayStats.class);
+				/*Intent i = new Intent(getApplicationContext(), DisplayStats.class);
 	            i.putExtra("trackNumber", track);
 
-	            startActivity(i);
+	            startActivity(i);*/
 			}
 		}
 	}
