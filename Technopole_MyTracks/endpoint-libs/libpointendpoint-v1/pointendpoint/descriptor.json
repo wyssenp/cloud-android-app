@@ -1,13 +1,13 @@
 {
   "files": [
     {
-      "downloadUrl": "/downloads/pointendpoint/v1/20141211223152/java/1.18.0-rc/mycompany.com-pointendpoint-v1-20141211223152-java-1.18.0-rc-sources.jar", 
-      "path": "mycompany.com-pointendpoint-v1-20141211223152-java-1.18.0-rc-sources.jar", 
+      "downloadUrl": "/downloads/pointendpoint/v1/20141217152310/java/1.18.0-rc/mycompany.com-pointendpoint-v1-20141217152310-java-1.18.0-rc-sources.jar", 
+      "path": "mycompany.com-pointendpoint-v1-20141217152310-java-1.18.0-rc-sources.jar", 
       "type": "source", 
-      "timestamp": "2014-12-11 22:31"
+      "timestamp": "2014-12-17 15:23"
     }, 
     {
-      "path": "mycompany.com-pointendpoint-v1-20141211223152-java-1.18.0-rc.jar.properties", 
+      "path": "mycompany.com-pointendpoint-v1-20141217152310-java-1.18.0-rc.jar.properties", 
       "type": "android.properties"
     }
   ], 
@@ -675,5 +675,5 @@
   "packagePath": "services", 
   "language_version": "1.18.0-rc", 
   "id": "pointendpoint:v1", 
-  "revision": 20141211223152
+  "revision": 20141217152310
 }

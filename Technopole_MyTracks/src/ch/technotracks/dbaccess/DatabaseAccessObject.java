@@ -351,7 +351,7 @@ public abstract class DatabaseAccessObject
 	 */
 	private static Cursor selectAllToUpload()
 	{
-		String sql = "SELECT trackId, latitude, longitude, altitude, accuracy, satellites FROM Point WHERE uploaded = 'false'";
+		String sql = "SELECT pointId, trackId, latitude, longitude, altitude, accuracy, satellites FROM Point WHERE uploaded = 'false'";
 
         return database.rawQuery(sql, null);
 	}
