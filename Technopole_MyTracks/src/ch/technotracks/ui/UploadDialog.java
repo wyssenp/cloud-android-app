@@ -15,11 +15,13 @@ import ch.technotracks.dbaccess.DatabaseAccessObject;
 import ch.technotracks.R;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.widget.Toast;
 
 /**
  * A dialog box for the data upload on the server
@@ -63,6 +65,7 @@ public class UploadDialog extends DialogFragment
 			if(which == Dialog.BUTTON_POSITIVE)
 			{
 				DatabaseAccessObject.save();
+				
 			}
 		}
 	}
