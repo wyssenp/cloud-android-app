@@ -64,8 +64,10 @@ public class UploadDialog extends DialogFragment
 		{
 			if(which == Dialog.BUTTON_POSITIVE)
 			{
+				int oldOrientation = getActivity().getRequestedOrientation();
+				getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 				DatabaseAccessObject.save();
-				
+				getActivity().setRequestedOrientation(oldOrientation);
 			}
 		}
 	}
