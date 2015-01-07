@@ -222,6 +222,12 @@ public class Capturing extends MapActivity
 		manager.removeUpdates(locationListener);
 		if(NetworkTools.isNetworkAvailable(getApplicationContext()))
 			DatabaseAccessObject.save();
+		
+		Intent i = new Intent(getApplicationContext(), DisplayStats.class);
+        i.putExtra("trackNumber", track);
+
+        startActivity(i);
+		
 	}
 
 	/**
