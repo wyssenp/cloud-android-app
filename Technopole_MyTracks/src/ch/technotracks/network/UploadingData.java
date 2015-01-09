@@ -12,16 +12,9 @@ package ch.technotracks.network;
 
 import android.database.Cursor;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
@@ -31,7 +24,6 @@ import com.mycompany.services.pointendpoint.Pointendpoint;
 import com.mycompany.services.pointendpoint.model.Point;
 
 import ch.technotracks.CloudEndpointUtils;
-import ch.technotracks.constant.Constant;
 import ch.technotracks.dbaccess.DatabaseAccessObject;
 
 
@@ -44,16 +36,16 @@ import ch.technotracks.dbaccess.DatabaseAccessObject;
 
 public class UploadingData extends AsyncTask<Cursor, Void, Void>
 {
-//	private HttpClient httpClient;
-//	private HttpPost post;
 
 	private Pointendpoint.Builder endpointBuilder;
 	private Pointendpoint endpoint;
+	
 	/**
 	 * Constructor
 	 */
 	public UploadingData()
 	{
+		//Point
 		endpointBuilder = new Pointendpoint.Builder(AndroidHttp.newCompatibleTransport(), 
 				new JacksonFactory(), 
 				new HttpRequestInitializer() {
@@ -62,10 +54,6 @@ public class UploadingData extends AsyncTask<Cursor, Void, Void>
 				});
 		
 		endpoint = CloudEndpointUtils.updateBuilder(endpointBuilder).build();
-		
-//		httpClient = new DefaultHttpClient();
-//		post = new HttpPost(Constant.URL_TO_UPLOAD_DATA);
-//		post.addHeader("Content-type", "text/xml");
 	}
 
 	/**
@@ -87,43 +75,29 @@ public class UploadingData extends AsyncTask<Cursor, Void, Void>
 			{
 				tmp = new Point();
 				tmp.setPointId(cursor.getLong(0));
+				tmp.setTrackId(cursor.getInt(1));
 				tmp.setLatitude(cursor.getDouble(2));
 				tmp.setLongtitude(cursor.getDouble(3));
 				tmp.setAltitude(cursor.getDouble(4));
-//				post.setEntity(new StringEntity(dataToXML(tmp)));	//convert the data object to xml and put it in post
-//	
-//				HttpResponse response = httpClient.execute(post);	//execute posting
-//				
-//				int statusCode = response.getStatusLine().getStatusCode();	//get back the response of the post action
-//				
-//				if(statusCode == 200)	//check everything is ok
-//				{
-//					DatabaseAccessObject.setUploadedToTrue(tmp.getId());	//if ok we set the line in database as uploaded
-//				}
+				tmp.setSpeed(cursor.getFloat(5));
+				tmp.setBearing(cursor.getFloat(6));
+				tmp.setAccuracy(cursor.getFloat(7));
+				tmp.setSatellites(cursor.getInt(8));
+				tmp.setTime(cursor.getLong(9));
+				
 				endpoint.insertPoint(tmp).execute();
+				
+				DatabaseAccessObject.setUploadedToTrue(tmp.getPointId());
 			}
 			catch(IOException e)
 			{
 				e.printStackTrace();
 			}
 		}
-	
+		
 		cursor.close();
+		
 		return null;
 	}
 
-	/**
-	 * Convert data into an xml file for upload
-	 * @param data
-	 * The Data to convert
-	 * @return
-	 * An xml formated String
-	 */
-	private String dataToXML(Data data)
-	{
-        return "<?xml version='1.0' encoding='UTF-8' ?>" + "<data><longitude>" + data.getLongitude() +
-               "</longitude><latitude>" + data.getLatitude() + "</latitude><altitude>" + data.getAltitude() +
-               "</altitude><accuracy>" + data.getAccuracy() + "</accuracy><satellites>" + data.getSatellites() +
-               "</satellites></data>";
-	}
 }
