@@ -14,7 +14,6 @@ public class RegistrationActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//This is a comment 2
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		
