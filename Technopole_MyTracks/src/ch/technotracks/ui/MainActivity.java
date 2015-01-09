@@ -19,12 +19,14 @@ import ch.technotracks.file.DirectoryTools;
 import ch.technotracks.file.Kml;
 import ch.technotracks.network.DownloadMap;
 import ch.technotracks.network.NetworkTools;
+import ch.technotracks.CloudEndpointUtils;
 import ch.technotracks.R;
 
 
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -51,18 +53,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.List;
 
 import android.os.AsyncTask;
-import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
-//import com.google.api.client.json.jackson.JacksonFactory;
-import com.mycompany.services.userendpoint.model.User;
-import com.mycompany.services.userendpoint.Userendpoint;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.mycompany.services.trackendpoint.Trackendpoint;
+import com.mycompany.services.trackendpoint.model.CollectionResponseTrack;
+import com.mycompany.services.trackendpoint.model.Track;
+
 /**
  * The main activity class
  * @author Joel
@@ -76,6 +79,7 @@ public class MainActivity extends FragmentActivity
     private Button newTrack;
     private int track;
     private EditText trackName;
+    public List<Track> tracks;
 
     /**
      * Bind menu to list
@@ -116,6 +120,7 @@ public class MainActivity extends FragmentActivity
         return false; 
     }
 
+    @SuppressLint("InflateParams")
     private void createNewTrackDialog()
     {
         AlertDialog dialog = new AlertDialog.Builder(this).create();
@@ -252,7 +257,103 @@ public class MainActivity extends FragmentActivity
             }
         }
     }
+    
+    /**
+     * Inner class used to get the maximum track ID on the datastore
+     * @author Pierre-Alain Wyssen
+     *
+     */
+    private class GetMaxTrackId extends AsyncTask<Void, Void, CollectionResponseTrack> {
 
+		@Override
+		protected CollectionResponseTrack doInBackground(Void... params) {
+			Trackendpoint.Builder endpointBuilder = new Trackendpoint.Builder(AndroidHttp.newCompatibleTransport(), new JacksonFactory(), null);
+			
+			endpointBuilder = CloudEndpointUtils.updateBuilder(endpointBuilder);
+			
+			CollectionResponseTrack result = null;
+			
+			Trackendpoint endpoint = endpointBuilder.build();
+			
+			try {
+				result = endpoint.listTrack().execute();
+			} catch (IOException e) {
+				e.printStackTrace();
+				result = null;
+			}
+			
+			return result;
+		}
+		
+		@Override
+		protected void onPostExecute(CollectionResponseTrack result) {
+			tracks = result.getItems();
+			//get the highest trackId in the datastore
+			long maxTrackIdDatastore = tracks.get(tracks.size()-1).getTrackId();
+			if(track > maxTrackIdDatastore)
+			{
+				Cursor c = DatabaseAccessObject.getTracksNotUploaded(maxTrackIdDatastore);
+                new TrackUpload().execute(c);
+			}
+			track = (int) (maxTrackIdDatastore + 1); //next trackId
+		}
+    	
+    }
+    
+    /**
+     * Inner class used to upload tracks to the datastore
+     * @author Pierre-Alain Wyssen
+     *
+     */
+    private class TrackUpload extends AsyncTask<Cursor, Void, Void> {
+
+    	private Trackendpoint.Builder endpointBuilder;
+    	private Trackendpoint endpoint;
+    	
+    	public TrackUpload() {
+    		endpointBuilder = new Trackendpoint.Builder(AndroidHttp.newCompatibleTransport(), 
+					new JacksonFactory(), 
+					new HttpRequestInitializer() {
+						@Override
+						public void initialize(HttpRequest arg0) throws IOException {}
+					});
+			endpoint = CloudEndpointUtils.updateBuilder(endpointBuilder).build();
+    	}
+    	
+		@Override
+		protected Void doInBackground(Cursor... params) {
+			Cursor cursor = params[0];
+			
+			Track tmp;
+			
+			cursor.move(-1);
+			while(cursor.moveToNext())
+			{
+				try {
+					tmp = new Track();
+					tmp.setTrackId(cursor.getLong(0));
+					tmp.setDate(new com.mycompany.services.trackendpoint.model.Date().setTime(cursor.getLong(1)));
+					tmp.setName(cursor.getString(2));
+				
+					endpoint.insertTrack(tmp).execute();
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			
+			cursor.close();
+			
+			return null;
+		}
+    	
+		
+    }
+
+    /**
+     * When GPS is not activated the user will be informed
+     */
     @Override
     protected void onStart()
     {
@@ -411,20 +512,30 @@ public class MainActivity extends FragmentActivity
         }
     }
     
+    /**
+     * When the user clicks on a track a dialog shows where he can choose whether he 
+     * wants to see the statistics for this track or the track itself
+     * @author Marco Dias
+     */
     private void showChooseDialog()
     {
 		OnClickListener clickListener = new MyClicListener();
     	
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Display");
-        dialog.setMessage("Track or Stats");
-        dialog.setCancelable(false);
+        dialog.setMessage("Would you like to see the stats or the track?");
+        dialog.setCancelable(true);
         dialog.setPositiveButton("Track", clickListener);
 		dialog.setNegativeButton("Stats", clickListener);
 
         dialog.show();
     }
     
+    /**
+     * Custom click listener, to redirect to the Capturing or DisplayStats activity
+     * @author Marco Dias
+     *
+     */
     private class MyClicListener implements OnClickListener
 	{
 		/**
@@ -464,6 +575,8 @@ public class MainActivity extends FragmentActivity
             if(which == AlertDialog.BUTTON_POSITIVE)
             {
                 setTrack();
+                
+                new GetMaxTrackId().execute();
 
                 Intent i = new Intent(getApplicationContext(), Capturing.class);
                 i.putExtra("trackNumber", track);
