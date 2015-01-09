@@ -10,6 +10,7 @@
 
 package ch.technotracks.dbaccess;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -19,6 +20,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * @author Joel
  *
  */
+@SuppressLint("SdCardPath")
 public class DatabaseUtility extends SQLiteOpenHelper
 {
 	private static final String DATABASE_NAME = "TechnoTracks.db";
