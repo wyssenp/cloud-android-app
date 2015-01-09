@@ -8,14 +8,10 @@ import android.os.Bundle;
 
 public class LeaderboardsRegistration extends FragmentActivity {
 
-	//This is a comment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_leaderboards_registration);
-
-//		Button btnContinue = (Button) findViewById(R.id.button1);
-//		Button btnDoItLater = (Button) findViewById(R.id.button2);
 	}
 
 	public void backToMain(View view) {
