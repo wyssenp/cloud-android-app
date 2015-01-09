@@ -1,24 +1,16 @@
 package ch.technotracks.ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.mapsforge.core.GeoPoint;
 
 import ch.technotracks.R;
-import ch.technotracks.R.id;
-import ch.technotracks.R.layout;
-import ch.technotracks.R.menu;
 import ch.technotracks.dbaccess.DatabaseAccessObject;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 public class DisplayStats extends Activity {
@@ -67,46 +59,28 @@ public class DisplayStats extends Activity {
 
 	}
 
+	/**
+	 * Gets the number of points per track
+	 * @return Number of points
+	 */
 	private int NumberOfPoints() 
 	{
 		return DatabaseAccessObject.getNumberOfPoints(track);
 	}
 
-	private double MaxLatitude() 
-	{
-		return DatabaseAccessObject.getMaxLatitude(track);
-	}
-
-	private double MinLongitude() 
-	{
-		return DatabaseAccessObject.getMinLongitude(track);
-	}
-
+	/**
+	 * Calls the method getAvgAltitude in the type DatabaseAccessObject
+	 * @return The average altitude per track
+	 */
 	private double AvgAltitude() 
 	{
 		return DatabaseAccessObject.getAvgAltitude(track);
 	}
 
-	private double MinAltitude()
-	{
-		return DatabaseAccessObject.getMinAltitude(track);
-	}
-
-	private double MaxAltitude()
-	{
-		return DatabaseAccessObject.getMaxAltitude(track);
-	}
-
-	private long GetMinTime() 
-	{
-		return DatabaseAccessObject.getMinTime(track);
-	}
-
-	private long GetMaxTime() 
-	{
-		return DatabaseAccessObject.getMaxTime(track);
-	}
-
+	/**
+	 * Calculates the time the track has been recorded for
+	 * @return A string containing the time difference
+	 */
 	private String getTime() 
 	{
 		long i = DatabaseAccessObject.getMaxTime(track);
@@ -119,6 +93,13 @@ public class DisplayStats extends Activity {
 
 	}
 
+	/**
+	 * Used to calculate the difference between 2 dates
+	 * @param dateOne The first date
+	 * @param dateTwo The second date
+	 * @return A human-readable string, for example: 0 hour(s) 12 min(s)
+	 */
+	@SuppressLint("DefaultLocale")
 	public String getTimeDiff(Date dateOne, Date dateTwo) {
 		String diff = "";
 		long timeDiff = Math.abs(dateOne.getTime() - dateTwo.getTime());
@@ -127,6 +108,10 @@ public class DisplayStats extends Activity {
 		return diff;
 	}
 
+	/**
+	 * Calculates the distance travelled per track
+	 * @return Distance travelled
+	 */
 	private double getFinalDistance() {
 
 		Cursor c = DatabaseAccessObject.getTrackPoints(track);
@@ -166,21 +151,17 @@ public class DisplayStats extends Activity {
 
 		return total ;
 	}
-
-	/*
-	private double getDistance()
-	{
-		double lat1 = DatabaseAccessObject.getMinLatitude(track);
-		double lat2 = DatabaseAccessObject.getMaxLatitude(track);
-		double lon1 = DatabaseAccessObject.getMinLongitude(track);
-		double lon2 = DatabaseAccessObject.getMaxLongitude(track);
-		double el1 = DatabaseAccessObject.getMinAltitude(track);
-		double el2 = DatabaseAccessObject.getMaxAltitude(track);
-
-		return distance(lat1, lat2, lon1, lon2, el1, el2);
-	}
-	 */
 	
+	/**
+	 * Calculates the distance travelled per track, taking into consideration the earth's curvature
+	 * @param lat1 Latitude 1
+	 * @param lat2 Latitude 2
+	 * @param lon1 Longitude 1
+	 * @param lon2 Longitude 2
+	 * @param el1 Altitude 1
+	 * @param el2 Altitude 2
+	 * @return Distance travelled
+	 */
 	private double distance(double lat1, double lat2, double lon1, double lon2,
 			double el1, double el2) {
 
@@ -199,6 +180,13 @@ public class DisplayStats extends Activity {
 		return Math.sqrt(distance);
 	}
 
+	/**
+	 * Convert degrees to radiant
+	 * @param
+	 * deg Number of degrees
+	 * @return
+	 * The converted angle in radiant
+	 */
 	private double deg2rad(double deg) {
 		return (deg * Math.PI / 180.0);
 	}
