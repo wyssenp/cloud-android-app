@@ -50,13 +50,12 @@ public abstract class DatabaseAccessObject
 	}
 	
 	/**
-	 * Get STATS
-	 * @param trackId
-	 * The track id
+	 * Get the highest timestamp per track (used to calculate the duration)
+	 * @param
+	 * trackId The track id
 	 * @return
-	 * A cursor containing datas
+	 * A timestamp.
 	 */
-	
 	public static long getMaxTime(int trackId)
 	{
 		String sql = "SELECT MAX(time) FROM Point WHERE trackId = " + trackId ;
@@ -69,6 +68,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getLong(0);
 	}
 	
+	/**
+	 * Get the lowest timestamp per track (used to calculate the duration)
+	 * @param
+	 * trackId The track id
+	 * @return
+	 * A timestamp.
+	 */
 	public static long getMinTime(int trackId)
 	{
 		String sql = "SELECT MIN(time) FROM Point WHERE trackId = " + trackId ;
@@ -81,6 +87,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getLong(0);
 	}
 	
+	/**
+	 * Get the number of points per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * Number of tracks
+	 */
 	public static int getNumberOfPoints(int trackId)
 	{
 		String sql = "SELECT COUNT(DISTINCT pointId) FROM Point WHERE trackId = " + trackId ;
@@ -93,6 +106,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getInt(0);
 	}
 	
+	/**
+	 * Get the maximum bearing per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The maximum bearing
+	 */
 	public static float getMaxBearing(int trackId)
 	{
 		String sql = "SELECT MAX(bearing) FROM Point WHERE trackId = " + trackId ;
@@ -105,6 +125,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getFloat(0);
 	}
 	
+	/**
+	 * Get the minimum bearing per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The minimum bearing
+	 */
 	public static float getMinBearing(int trackId)
 	{
 		String sql = "SELECT MIN(bearing) FROM Point WHERE trackId = " + trackId ;
@@ -117,6 +144,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getFloat(0);
 	}
 	
+	/**
+	 * Get the average bearing per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The average bearing
+	 */
 	public static float getAvgBearing(int trackId)
 	{
 		String sql = "SELECT AVG(bearing) FROM Point WHERE trackId = " + trackId ;
@@ -129,6 +163,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getFloat(0);
 	}
 	
+	/**
+	 * Get the maximum speed per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The maximum speed
+	 */
 	public static float getMaxSpeed(int trackId)
 	{
 		String sql = "SELECT MAX(speed) FROM Point WHERE trackId = " + trackId ;
@@ -141,6 +182,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getFloat(0);
 	}
 	
+	/**
+	 * Get the minimum speed per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The minimum speed
+	 */
 	public static float getMinSpeed(int trackId)
 	{
 		String sql = "SELECT MIN(speed) FROM Point WHERE trackId = " + trackId ;
@@ -153,6 +201,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getFloat(0);
 	}
 	
+	/**
+	 * Get the average speed per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The average speed
+	 */
 	public static float getAvgSpeed(int trackId)
 	{
 		String sql = "SELECT AVG(speed) FROM Point WHERE trackId = " + trackId ;
@@ -165,6 +220,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getFloat(0);
 	}
 	
+	/**
+	 * Get the maximum altitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The maximum altitude
+	 */
 	public static double getMaxAltitude(int trackId)
 	{
 		String sql = "SELECT MAX(altitude) FROM Point WHERE trackId = " + trackId ;
@@ -177,6 +239,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the minimum altitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The minimum altitude
+	 */
 	public static double getMinAltitude(int trackId)
 	{
 		String sql = "SELECT MIN(altitude) FROM Point WHERE trackId = " + trackId ;
@@ -189,6 +258,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the average altitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The average altitude
+	 */
 	public static double getAvgAltitude(int trackId)
 	{
 		String sql = "SELECT AVG(altitude) FROM Point WHERE trackId = " + trackId ;
@@ -201,6 +277,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the maximum longitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The maximum longitude
+	 */
 	public static double getMaxLongitude(int trackId)
 	{
 		String sql = "SELECT MAX(longitude) FROM Point WHERE trackId = " + trackId ;
@@ -213,6 +296,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the minimum longitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The minimum longitude
+	 */
 	public static double getMinLongitude(int trackId)
 	{
 		String sql = "SELECT MIN(longitude) FROM Point WHERE trackId = " + trackId ;
@@ -225,6 +315,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the average longitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The average longitude
+	 */
 	public static double getAvgLongitude(int trackId)
 	{
 		String sql = "SELECT AVG(longitude) FROM Point WHERE trackId = " + trackId ;
@@ -237,6 +334,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the maximum latitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The maximum latitude
+	 */
 	public static double getMaxLatitude(int trackId)
 	{
 		String sql = "SELECT MAX(latitude) FROM Point WHERE trackId = " + trackId ;
@@ -249,6 +353,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Get the minimum latitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The minimum latitude
+	 */
 	public static double getMinLatitude(int trackId)
 	{
 		String sql = "SELECT MIN(latitude) FROM Point WHERE trackId = " + trackId ;
@@ -261,6 +372,13 @@ public abstract class DatabaseAccessObject
 		return cursor.getDouble(0);
 	}
 	
+	/**
+	 * Calculates the average latitude per track
+	 * @param
+	 * trackId The track ID
+	 * @return
+	 * The average latitude
+	 */
 	public static double getAvgLatitude(int trackId)
 	{
 		String sql = "SELECT AVG(latitude) FROM Point WHERE trackId = " + trackId ;
@@ -301,6 +419,17 @@ public abstract class DatabaseAccessObject
 		String sql = "SELECT trackId AS _id, date, name FROM Track";	//AS _id necessary for the SimpleCursorAdapter
 
         return database.rawQuery(sql, null);
+	}
+
+	/**
+	 * Get all the tracks that have not been uploaded to the datastore yet
+	 * @param id The first track ID which has not been uploaded yet
+	 * @return A cursor with the tracks
+	 */
+	public static Cursor getTracksNotUploaded(long id)
+	{
+		String sql = "SELECT trackId AS _id, date, name FROM Track WHERE _id > " + id;
+		return database.rawQuery(sql, null);
 	}
 
 	/**
@@ -351,9 +480,9 @@ public abstract class DatabaseAccessObject
 	 */
 	private static Cursor selectAllToUpload()
 	{
-		String sql = "SELECT pointId, trackId, latitude, longitude, altitude, accuracy, satellites FROM Point WHERE uploaded = 'false'";
-
-        return database.rawQuery(sql, null);
+		String sql = "SELECT pointId, trackId, latitude, longitude, altitude, speed, bearing, accuracy, satellites, time FROM Point WHERE uploaded = 'false'";
+		
+        	return database.rawQuery(sql, null);
 	}
 
 	/**
