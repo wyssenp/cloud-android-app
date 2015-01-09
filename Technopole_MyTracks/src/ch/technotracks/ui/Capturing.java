@@ -11,6 +11,7 @@
 package ch.technotracks.ui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -35,12 +36,8 @@ import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.android.maps.overlay.OverlayWay;
 import org.mapsforge.core.GeoPoint;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import ch.technotracks.R;
 import ch.technotracks.constant.Constant;
@@ -79,6 +76,12 @@ public class Capturing extends MapActivity
 		return true;
 	}
 
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+	}
+	
 	/**
 	 * Set icon and title of the menus
 	 */
@@ -129,7 +132,6 @@ public class Capturing extends MapActivity
 
 		Log.d(STORAGE_SERVICE, "salut");
 
-		putStats();
 		putExistingMarkers();
 
 		/* GPS initialization */
@@ -138,13 +140,6 @@ public class Capturing extends MapActivity
 		GpsStatus.Listener gpsStatusListener = new MyGpsStatusListener();
 		manager = (LocationManager)getSystemService(LOCATION_SERVICE);
 		manager.addGpsStatusListener(gpsStatusListener);
-	}
-
-	private void putStats() 
-	{
-		long i = DatabaseAccessObject.getMaxTime(track);
-		long v = DatabaseAccessObject.getMinTime(track);
-	    
 	}
 	
 
@@ -222,12 +217,6 @@ public class Capturing extends MapActivity
 		manager.removeUpdates(locationListener);
 		if(NetworkTools.isNetworkAvailable(getApplicationContext()))
 			DatabaseAccessObject.save();
-		
-		Intent i = new Intent(getApplicationContext(), DisplayStats.class);
-        i.putExtra("trackNumber", track);
-
-        startActivity(i);
-		
 	}
 
 	/**
@@ -284,6 +273,7 @@ public class Capturing extends MapActivity
 		ArrayItemizedOverlay itemizedOverlay = new ArrayItemizedOverlay(getResources().getDrawable(R.drawable.ic_maps_indicator_current_position));	//creating the array containing all overlayItem
 		itemizedOverlay.addItem(item);	//adding item to the array
 		map.getOverlays().add(itemizedOverlay);	//adding the item overlay to the map
+		
 	}
 
 	/**
@@ -293,6 +283,9 @@ public class Capturing extends MapActivity
 	protected void onDestroy()
 	{
 		manager.removeUpdates(locationListener);	//stop the GPS listening
+		//Fix for the memory problem
+		//ViewGroup vg = (ViewGroup)(map.getParent());
+		//vg.removeView(map);
 		super.onDestroy();
 	}
 
@@ -302,7 +295,7 @@ public class Capturing extends MapActivity
 	 * @author Joel
 	 *
 	 */
-	private class MyLocationListener implements LocationListener
+	private class MyLocationListener implements LocationListener, GpsStatus.NmeaListener
 	{
 		/**
 		 * Called when the current location change
@@ -391,6 +384,15 @@ public class Capturing extends MapActivity
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras)
 		{}	// Useless
+
+		/**
+		 * Used to get the GDOP and PDOP of the GPS location captured
+		 */
+		@Override
+		public void onNmeaReceived(long timestamp, String nmea) {
+			// TODO Auto-generated method stub
+			Log.i("nmea", nmea);
+		}
 	}
 
 
@@ -425,6 +427,7 @@ public class Capturing extends MapActivity
 		 * @return
 		 * The number of satellites
 		 */
+		@SuppressWarnings("unused")
 		private int getSatelliteNumber()
 		{
 			int satNumber = 0;
