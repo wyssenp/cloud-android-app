@@ -21,8 +21,8 @@ public abstract class Constant
 	public static final String MAP_SERVER_URL = "http://download.mapsforge.org/maps/europe/switzerland.map";
 	
 	//captureDisplay
-	public static final long MIN_TIME = 30 * 1000;
-	public static final float MIN_DISTANCE = 0f;
+	public static final long MIN_TIME = 10 * 1000;
+	public static final float MIN_DISTANCE = 2f;
 	public static final int DEFAULT_ZOOM = 15;
 	
 	//saving
