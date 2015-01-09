@@ -263,7 +263,8 @@ public class MainActivity extends FragmentActivity
      * @author Pierre-Alain Wyssen
      *
      */
-    private class GetMaxTrackId extends AsyncTask<Void, Void, CollectionResponseTrack> {
+    @SuppressWarnings("unused")
+	private class GetMaxTrackId extends AsyncTask<Void, Void, CollectionResponseTrack> {
 
 		@Override
 		protected CollectionResponseTrack doInBackground(Void... params) {
@@ -502,13 +503,7 @@ public class MainActivity extends FragmentActivity
             parent.getItemAtPosition(position);
             
             showChooseDialog();
-            
-            /*
-            Intent i = new Intent(getApplicationContext(), DisplayStats.class);
-            i.putExtra("trackNumber", trackId);
 
-            startActivity(i);
-            */
         }
     }
     
@@ -576,7 +571,7 @@ public class MainActivity extends FragmentActivity
             {
                 setTrack();
                 
-                new GetMaxTrackId().execute();
+                //new GetMaxTrackId().execute();
 
                 Intent i = new Intent(getApplicationContext(), Capturing.class);
                 i.putExtra("trackNumber", track);
